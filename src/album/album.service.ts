@@ -3,7 +3,7 @@ import { DatabaseService, DbEntity } from '../database/database.service';
 import { Album } from './entities/album.entity';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { CreateAlbumDto } from './dto/create-album.dto';
-// import { Track } from '../track/entities/track.entity';
+import { Track } from '../track/entities/track.entity';
 
 @Injectable()
 export class AlbumService {
@@ -53,13 +53,13 @@ export class AlbumService {
     this.databaseService.favorites.albums =
       this.databaseService.favorites.albums.filter((albumId) => albumId !== id);
 
-    // const albumTracks = this.databaseService
-    //   .findAll<Track>(DbEntity.TRACK)
-    //   .filter((track) => track.albumId === id);
+    const albumTracks = this.databaseService
+      .findAll<Track>(DbEntity.TRACK)
+      .filter((track) => track.albumId === id);
 
-    // albumTracks.forEach((track) => {
-    //   track.albumId = null;
-    //   this.databaseService.update(DbEntity.TRACK, track.id, track);
-    // });
+    albumTracks.forEach((track) => {
+      track.albumId = null;
+      this.databaseService.update(DbEntity.TRACK, track.id, track);
+    });
   }
 }

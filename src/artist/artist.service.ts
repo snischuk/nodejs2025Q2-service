@@ -4,7 +4,7 @@ import { Artist } from './entities/artist.entity';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { Album } from '../album/entities/album.entity';
-// import { Track } from '../track/entities/track.entity';
+import { Track } from '../track/entities/track.entity';
 
 @Injectable()
 export class ArtistService {
@@ -62,17 +62,17 @@ export class ArtistService {
     const artistAlbums = this.databaseService
       .findAll<Album>(DbEntity.ALBUM)
       .filter((album) => album.artistId === id);
-    // const artistTracks = this.databaseService
-    //   .findAll<Track>(DbEntity.TRACK)
-    //   .filter((track) => track.artistId === id);
+    const artistTracks = this.databaseService
+      .findAll<Track>(DbEntity.TRACK)
+      .filter((track) => track.artistId === id);
 
     artistAlbums.forEach((album) => {
       album.artistId = null;
       this.databaseService.update(DbEntity.ALBUM, album.id, album);
     });
-    // artistTracks.forEach((track) => {
-    //   track.artistId = null;
-    //   this.databaseService.update(DbEntity.TRACK, track.id, track);
-    // });
+    artistTracks.forEach((track) => {
+      track.artistId = null;
+      this.databaseService.update(DbEntity.TRACK, track.id, track);
+    });
   }
 }
