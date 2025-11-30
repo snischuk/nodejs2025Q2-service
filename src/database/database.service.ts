@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
+import { Favorites } from '../favorites/entities/favorite.entity';
 
 export const enum DbEntity {
   USER = 'user',
@@ -21,7 +22,7 @@ export class DatabaseService {
     artists: [],
     albums: [],
     tracks: [],
-  };
+  } as Favorites;
 
   private getDataObject(entity: DbEntity) {
     return this.data[entity];
