@@ -1,72 +1,101 @@
 # Home Library Service
 
+Home music library service built with NestJS. Uses **schema-first approach** for Swagger/OpenAPI documentation.
+
+## Repository
+
+https://github.com/snischuk/nodejs2025Q2-service  
+
 ## Prerequisites
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Git — [Install Git](https://git-scm.com/downloads)  
+- Node.js (v18+) — [Install Node.js](https://nodejs.org/en/download/)
 
-## Downloading
+## Setup & Run
 
-```
-git clone {repository URL}
-```
+Follow these steps:
 
-## Installing NPM modules
+1. Clone the repository:
 
-```
-npm install
-```
+   git clone https://github.com/snischuk/nodejs2025Q2-service.git
 
-## Running application
+2. Go into the project folder:
 
-```
-npm start
-```
+   cd nodejs2025Q2-service
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+3. Switch to the dev branch:
 
-## Testing
+   git switch dev-part-1
 
-After application running open new terminal and enter:
+4. Install dependencies:
 
-To run all tests without authorization
+   npm install
 
-```
-npm run test
-```
+5. Start the application in development mode:
 
-To run only one of all test suites
+   npm run start:dev
 
-```
-npm run test -- <path to suite>
-```
+6. (In a separate terminal, if the app is running) Run tests:
 
-To run all test with authorization
+   npm run test
 
-```
-npm run test:auth
-```
+The server runs on port `4000` by default. Swagger documentation is available at: [http://localhost:4000/doc](http://localhost:4000/doc)
 
-To run only specific test suite with authorization
+---
 
-```
-npm run test:auth -- <path to suite>
-```
+## Build for Production
 
-### Auto-fix and format
+Before building, it's recommended to clean the `dist` folder:
 
-```
-npm run lint
-```
+npm run prebuild
+npm run build
 
-```
-npm run format
-```
+- `prebuild` — removes the `dist` folder.  
+- `build` — compiles the NestJS application to the `dist` folder.  
 
-### Debugging in VSCode
+After building, you can run the compiled app with:
 
-Press <kbd>F5</kbd> to debug.
+node dist/main.js
 
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+---
+
+## API Endpoints
+
+| Method | Endpoint                  | Description                           |
+|--------|---------------------------|---------------------------------------|
+| GET    | /user                     | Get all users                          |
+| POST   | /user                     | Create a new user                      |
+| GET    | /user/:userId             | Get user by ID                         |
+| PUT    | /user/:userId             | Update user password                   |
+| DELETE | /user/:userId             | Delete user                            |
+| GET    | /track                    | Get all tracks                         |
+| POST   | /track                    | Add new track                          |
+| GET    | /track/:id                | Get track by ID                        |
+| PUT    | /track/:id                | Update track information               |
+| DELETE | /track/:id                | Delete track                           |
+| GET    | /album                    | Get all albums                         |
+| POST   | /album                    | Add new album                           |
+| GET    | /album/:id                | Get album by ID                         |
+| PUT    | /album/:id                | Update album information               |
+| DELETE | /album/:id                | Delete album                            |
+| GET    | /artist                   | Get all artists                         |
+| POST   | /artist                   | Add new artist                          |
+| GET    | /artist/:id               | Get artist by ID                        |
+| PUT    | /artist/:id               | Update artist information               |
+| DELETE | /artist/:id               | Delete artist                            |
+| GET    | /favs                     | Get all favorites                       |
+| POST   | /favs/track/:id           | Add track to favorites                  |
+| DELETE | /favs/track/:id           | Remove track from favorites             |
+| POST   | /favs/album/:id           | Add album to favorites                  |
+| DELETE | /favs/album/:id           | Remove album from favorites             |
+| POST   | /favs/artist/:id          | Add artist to favorites                 |
+| DELETE | /favs/artist/:id          | Remove artist from favorites            |
+
+---
+
+## Notes
+
+- **Swagger/OpenAPI** documentation is based on a schema-first approach.
+- Ensure you run `npm run start:dev` **before running tests** if using e2e tests.
+- `npm run prebuild` + `npm run build` is needed for production builds.
+- Always switch to the branch `dev-part-1` after cloning to get the correct development version.
