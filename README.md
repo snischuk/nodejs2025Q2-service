@@ -15,15 +15,27 @@ https://github.com/snischuk/nodejs2025Q2-service
 
 Follow these steps:
 
-1. Clone the repository and go into the project folder:
+1. Clone the repository:
 
-   git clone https://github.com/snischuk/nodejs2025Q2-service.git && cd nodejs2025Q2-service
+   git clone https://github.com/snischuk/nodejs2025Q2-service.git
 
-2. Install dependencies, start the application in development mode, and run tests:
+2. Go into the project folder:
 
-   npm install && npm run start:dev
+   cd nodejs2025Q2-service
 
-   (In a separate terminal, if the app is running, run tests:)
+3. Switch to the dev branch:
+
+   git switch dev-part-1
+
+4. Install dependencies:
+
+   npm install
+
+5. Start the application in development mode:
+
+   npm run start:dev
+
+6. (In a separate terminal, if the app is running) Run tests:
 
    npm run test
 
@@ -35,7 +47,8 @@ The server runs on port `4000` by default. Swagger documentation is available at
 
 Before building, it's recommended to clean the `dist` folder:
 
-npm run prebuild && npm run build
+npm run prebuild
+npm run build
 
 - `prebuild` — removes the `dist` folder.  
 - `build` — compiles the NestJS application to the `dist` folder.  
@@ -85,3 +98,4 @@ node dist/main.js
 - **Swagger/OpenAPI** documentation is based on a schema-first approach.
 - Ensure you run `npm run start:dev` **before running tests** if using e2e tests.
 - `npm run prebuild` + `npm run build` is needed for production builds.
+- Always switch to the branch `dev-part-1` after cloning to get the correct development version.
