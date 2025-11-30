@@ -1,38 +1,62 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 
-interface DatabaseValue {
-  id?: string;
+export const enum DbEntity {
+  USER = 'user',
+  TRACK = 'track',
+  ARTIST = 'artist',
+  ALBUM = 'album',
 }
 
 @Injectable()
-export class DatabaseService<T extends DatabaseValue> {
-  private dataObject: { [id: string]: T } = {};
+export class DatabaseService {
+  private data: { [key: string]: { [id: string]: object } } = {
+    [DbEntity.USER]: {},
+    [DbEntity.ALBUM]: {},
+    [DbEntity.ARTIST]: {},
+    [DbEntity.TRACK]: {},
+  };
 
-  public create(partial: Partial<T>): T {
+  favorites = {
+    artists: [],
+    albums: [],
+    tracks: [],
+  };
+
+  private getDataObject(entity: DbEntity) {
+    return this.data[entity];
+  }
+
+  public create<T extends object>(entity: DbEntity, dto: Omit<T, 'id'>): T {
     const id = uuid();
-    const newValue = { id, ...partial } as T;
+    const newValue = { id, ...dto } as T;
 
-    this.dataObject[id] = newValue;
+    this.getDataObject(entity)[id] = newValue;
 
     return newValue;
   }
 
-  public findAll(): T[] {
-    return Object.values(this.dataObject);
+  public findAll<T extends object>(entity: DbEntity) {
+    return Object.values(this.getDataObject(entity)) as T[];
   }
 
-  public findOne(id: string): T {
-    return this.dataObject[id];
+  public findOne<T extends object>(entity: DbEntity, id: string) {
+    return this.getDataObject(entity)[id] as T;
   }
 
-  public update(id: string, record: Partial<T>): T {
-    this.dataObject[id] = { ...this.dataObject[id], ...record };
+  public update<T extends object>(
+    entity: DbEntity,
+    id: string,
+    partial: Partial<T>,
+  ) {
+    const dataObject = this.getDataObject(entity);
 
-    return this.dataObject[id];
+    dataObject[id] = { ...dataObject[id], ...partial };
+
+    return dataObject[id] as T;
   }
 
-  public remove(id: string): void {
-    delete this.dataObject[id];
+  public remove(entity: DbEntity, id: string): void {
+    delete this.getDataObject(entity)[id];
   }
 }
