@@ -1,72 +1,87 @@
 # Home Library Service
 
+Home music library service built with NestJS. Uses **schema-first approach** for Swagger/OpenAPI documentation.
+
+## Repository
+
+https://github.com/snischuk/nodejs2025Q2-service  
+
 ## Prerequisites
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Git — [Install Git](https://git-scm.com/downloads)  
+- Node.js (v18+) — [Install Node.js](https://nodejs.org/en/download/)
 
-## Downloading
+## Setup & Run
 
-```
-git clone {repository URL}
-```
+Follow these steps:
 
-## Installing NPM modules
+1. Clone the repository and go into the project folder:
 
-```
-npm install
-```
+   git clone https://github.com/snischuk/nodejs2025Q2-service.git && cd nodejs2025Q2-service
 
-## Running application
+2. Install dependencies, start the application in development mode, and run tests:
 
-```
-npm start
-```
+   npm install && npm run start:dev
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+   (In a separate terminal, if the app is running, run tests:)
 
-## Testing
+   npm run test
 
-After application running open new terminal and enter:
+The server runs on port `4000` by default. Swagger documentation is available at: [http://localhost:4000/doc](http://localhost:4000/doc)
 
-To run all tests without authorization
+---
 
-```
-npm run test
-```
+## Build for Production
 
-To run only one of all test suites
+Before building, it's recommended to clean the `dist` folder:
 
-```
-npm run test -- <path to suite>
-```
+npm run prebuild && npm run build
 
-To run all test with authorization
+- `prebuild` — removes the `dist` folder.  
+- `build` — compiles the NestJS application to the `dist` folder.  
 
-```
-npm run test:auth
-```
+After building, you can run the compiled app with:
 
-To run only specific test suite with authorization
+node dist/main.js
 
-```
-npm run test:auth -- <path to suite>
-```
+---
 
-### Auto-fix and format
+## API Endpoints
 
-```
-npm run lint
-```
+| Method | Endpoint                  | Description                           |
+|--------|---------------------------|---------------------------------------|
+| GET    | /user                     | Get all users                          |
+| POST   | /user                     | Create a new user                      |
+| GET    | /user/:userId             | Get user by ID                         |
+| PUT    | /user/:userId             | Update user password                   |
+| DELETE | /user/:userId             | Delete user                            |
+| GET    | /track                    | Get all tracks                         |
+| POST   | /track                    | Add new track                          |
+| GET    | /track/:id                | Get track by ID                        |
+| PUT    | /track/:id                | Update track information               |
+| DELETE | /track/:id                | Delete track                           |
+| GET    | /album                    | Get all albums                         |
+| POST   | /album                    | Add new album                           |
+| GET    | /album/:id                | Get album by ID                         |
+| PUT    | /album/:id                | Update album information               |
+| DELETE | /album/:id                | Delete album                            |
+| GET    | /artist                   | Get all artists                         |
+| POST   | /artist                   | Add new artist                          |
+| GET    | /artist/:id               | Get artist by ID                        |
+| PUT    | /artist/:id               | Update artist information               |
+| DELETE | /artist/:id               | Delete artist                            |
+| GET    | /favs                     | Get all favorites                       |
+| POST   | /favs/track/:id           | Add track to favorites                  |
+| DELETE | /favs/track/:id           | Remove track from favorites             |
+| POST   | /favs/album/:id           | Add album to favorites                  |
+| DELETE | /favs/album/:id           | Remove album from favorites             |
+| POST   | /favs/artist/:id          | Add artist to favorites                 |
+| DELETE | /favs/artist/:id          | Remove artist from favorites            |
 
-```
-npm run format
-```
+---
 
-### Debugging in VSCode
+## Notes
 
-Press <kbd>F5</kbd> to debug.
-
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+- **Swagger/OpenAPI** documentation is based on a schema-first approach.
+- Ensure you run `npm run start:dev` **before running tests** if using e2e tests.
+- `npm run prebuild` + `npm run build` is needed for production builds.
