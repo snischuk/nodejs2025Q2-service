@@ -1,0 +1,13 @@
+./node_modules
+./dist
+./test
+./.git
+./docker
+
+.env.*
+eslint.js
+.prettierrc
+jest.config.json
+README.md
+.gitignore
+nest-cli.json

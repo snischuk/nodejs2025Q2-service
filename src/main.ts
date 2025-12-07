@@ -7,7 +7,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { AppModule } from './app.module';
 
-const port = process.env.PORT || 4000;
+const PORT = process.env.NEST_APP_PORT || 4000;
 
 async function initSwagger(app: INestApplication) {
   const file = await readFile(join(__dirname, '../doc/api.yaml'), 'utf8');
@@ -23,9 +23,9 @@ async function bootstrap() {
 
   await initSwagger(app);
 
-  await app.listen(port, () => {
-    console.log(`Application is listening on port: ${port}`);
-    console.log(`Swagger is accessible at: http://localhost:${port}/doc`);
+  await app.listen(PORT, () => {
+    console.log(`Application is listening on port: ${PORT}`);
+    console.log(`Swagger is accessible at: http://localhost:${PORT}/doc`);
   });
 }
 
