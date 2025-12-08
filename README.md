@@ -56,8 +56,9 @@ Stop running containers:
 - `npm run docker:down:volumes`
 
 Built images pushed to DockerHub:
-- `snischuk/nodejs2025q3-service-app:latest`
-- `snischuk/nodejs2025-postgres-db:latest`
+- [`snischuk/nodejs2025q3-service-app:latest`](https://hub.docker.com/r/snischuk/nodejs2025q3-service-app/tags)
+- [`snischuk/nodejs2025q3-service-postgresdb:latest`](https://hub.docker.com/r/snischuk/nodejs2025q3-service-postgresdb/tags)
+
 
 Full vulnerability view:
 - `npm run docker:scan:app:cves`
