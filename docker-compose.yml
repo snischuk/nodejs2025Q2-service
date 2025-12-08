@@ -1,4 +1,4 @@
-ervices:
+services:
     postgresdb:
         container_name: nodejs2024Q3-service_db
         build:

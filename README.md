@@ -44,6 +44,17 @@ Don't forget `cp .env.example .env`
 The server runs on port `4000` by default. Swagger documentation is available at: [http://localhost:4000/doc](http://localhost:4000/doc)
 
 ---
+## Useful commands before starting:
+#### Stop & remove all containers
+`docker stop $(docker ps -aq) && docker rm $(docker ps -aq)`
+
+#### Remove all images
+`docker rmi -f $(docker images -aq)`
+
+#### Remove all volumes
+`docker volume ls -q | xargs -r docker volume rm`
+
+
 ## Running application with Docker
    `npm run docker:up:build` — builds Docker images and starts database & app services
 or `npm run docker:up` — just starts services without building
