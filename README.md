@@ -10,6 +10,7 @@ https://github.com/snischuk/nodejs2025Q2-service
 
 - Git — [Install Git](https://git-scm.com/downloads)  
 - Node.js (v18+) — [Install Node.js](https://nodejs.org/en/download/)
+- Docker & Docker Compose - install from [Docker official site](https://docs.docker.com/get-docker/)
 
 ## Setup & Run
 
@@ -25,7 +26,7 @@ Follow these steps:
 
 3. Switch to the dev branch:
 
-   git switch dev-part-1
+   git switch dev-part-2
 
 4. Install dependencies:
 
@@ -39,9 +40,32 @@ Follow these steps:
 
    npm run test
 
+Don't forget `cp .env.example .env`
 The server runs on port `4000` by default. Swagger documentation is available at: [http://localhost:4000/doc](http://localhost:4000/doc)
 
 ---
+## Running application with Docker
+   `npm run docker:up:build` — builds Docker images and starts database & app services
+or `npm run docker:up` — just starts services without building
+
+Application runs in development mode, rebuilds automatically on code changes
+
+Stop running containers:
+- `npm run docker:stop`
+- `npm run docker:down`
+- `npm run docker:down:volumes`
+
+Built images pushed to DockerHub:
+- `snischuk/nodejs2025q3-service-app:latest`
+- `snischuk/nodejs2025-postgres-db:latest`
+
+Full vulnerability view:
+- `npm run docker:scan:app:cves`
+- `npm run docker:scan:db:cves`
+
+Quick overview:
+- `npm run docker:scan:app:quickview`
+- `npm run docker:scan:db:quickview`
 
 ## Build for Production
 
@@ -93,9 +117,3 @@ node dist/main.js
 
 ---
 
-## Notes
-
-- **Swagger/OpenAPI** documentation is based on a schema-first approach.
-- Ensure you run `npm run start:dev` **before running tests** if using e2e tests.
-- `npm run prebuild` + `npm run build` is needed for production builds.
-- Always switch to the branch `dev-part-1` after cloning to get the correct development version.
