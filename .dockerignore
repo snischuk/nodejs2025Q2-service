@@ -8,7 +8,4 @@ dist
 .vscode
 
 .env*
-jest.config.json
-.prettierrc
-eslint.js
 README.md

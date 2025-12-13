@@ -32,17 +32,6 @@ Follow these steps:
 
    npm install
 
-5. Start the application in development mode:
-
-   npm run start:dev
-
-6. (In a separate terminal, if the app is running) Run tests:
-
-   npm run test
-
-Don't forget `cp .env.example .env`
-The server runs on port `4000` by default. Swagger documentation is available at: [http://localhost:4000/doc](http://localhost:4000/doc)
-
 ---
 
 ## Useful commands before starting Docker:
@@ -76,7 +65,7 @@ The server runs on port `4000` by default. Swagger documentation is available at
 4.  Inside the container terminal (/usr/src/app), run the migrations:
     `npx prisma migrate dev`
 
-5.  After the migrations are successfully applied, you can run the tests:
+5.  After the migrations are successfully applied (and the database in the container is up!), you can run the tests:
     `npm run test`
 
 Note: Application in development mode rebuilds automatically on code changes
