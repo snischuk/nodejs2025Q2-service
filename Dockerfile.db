@@ -1,0 +1,5 @@
+FROM postgres:16-alpine
+
+RUN mkdir /dbLogs && chown postgres:postgres /dbLogs
+
+EXPOSE $PORT
