@@ -10,6 +10,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+    networks:
+      - home-library-net
+    restart: always
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
       - postgres_logs_dev:/dbLogs
@@ -29,8 +32,11 @@ services:
       - .env.dev
     ports:
       - '${PORT}:${PORT}'
+    networks:
+      - home-library-net
+    restart: on-failure
     volumes:
-      - .:/usr/src/app
+      - ./src:/usr/src/app/src
     depends_on:
       postgres:
         condition: service_healthy
@@ -41,3 +47,7 @@ services:
 volumes:
   postgres_data_dev:
   postgres_logs_dev:
+
+networks:
+  home-library-net:
+    driver: bridge
