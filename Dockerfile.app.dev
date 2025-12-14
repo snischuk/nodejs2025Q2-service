@@ -13,7 +13,7 @@ COPY nest-cli.json ./
 COPY test ./test
 COPY jest.config.json ./
 COPY .prettierrc ./
-COPY eslint.js ./
+COPY .eslintrc.js ./
 COPY prisma ./prisma
 COPY doc ./doc
 
