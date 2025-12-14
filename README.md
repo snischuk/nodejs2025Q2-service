@@ -26,7 +26,7 @@ Follow these steps:
 
 3. Switch to the dev branch:
 
-   git switch dev-part-2
+   git switch dev-part-3
 
 4. Install dependencies:
 
@@ -68,12 +68,19 @@ Follow these steps:
 5.  After the migrations are successfully applied (and the database in the container is up!), you can run the tests:
     `npm run test`
 
+6. To check the auth tests run:
+`npm run test:auth` and `npm run test:refresh`
+
+7. To check logger uncomment code in **src/main.ts** file (or somewhere else). Logs will be created in the root of the project in **logs/** folder
+
 Note: Application in development mode rebuilds automatically on code changes
 
 ### Production
 
 Start the optimized version (<500Mb):
 `npm run docker:up:prod`
+
+In prod-mode logger works as in dev-mode. (If you want to check tests, please run dev-mode)
 
 If you uncomment **image** field in **docker-compose.prod.yml** file, the images will be pulled from Docker Hub:
 
