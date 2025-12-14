@@ -1,0 +1,50 @@
+services:
+  postgres:
+    # image: snischuk/nodejs2025q2-service-database-with-auth:prod
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    container_name: nodejs2025-service_db_prod
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - home-library-net
+    restart: always
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - postgres_logs_prod:/dbLogs
+    healthcheck:
+      test:
+        ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB_NAME}']
+      interval: 5s
+      timeout: 2s
+      retries: 20
+
+  app:
+    # image: snischuk/nodejs2025q2-service-app-with-auth:prod
+    build:
+      context: .
+      dockerfile: Dockerfile.app.prod
+    container_name: nodejs2025-service_app_prod
+    env_file:
+      - .env.prod
+    ports:
+      - '${PORT}:${PORT}'
+    networks:
+      - home-library-net
+    restart: on-failure
+    volumes:
+      - ./logs:/usr/src/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data_prod:
+  postgres_logs_prod:
+
+networks:
+  home-library-net:
+    driver: bridge
