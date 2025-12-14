@@ -1,6 +1,6 @@
 services:
   postgres:
-    # image: snischuk/nodejs2025q2-service-database:prod
+    # image: snischuk/nodejs2025q2-service-database-with-auth:prod
     build:
       context: .
       dockerfile: Dockerfile.db
@@ -23,7 +23,7 @@ services:
       retries: 20
 
   app:
-    # image: snischuk/nodejs2025q2-service-app:prod
+    # image: snischuk/nodejs2025q2-service-app-with-auth:prod
     build:
       context: .
       dockerfile: Dockerfile.app.prod

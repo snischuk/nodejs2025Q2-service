@@ -84,8 +84,10 @@ In prod-mode logger works as in dev-mode. (If you want to check tests, please ru
 
 If you uncomment **image** field in **docker-compose.prod.yml** file, the images will be pulled from Docker Hub:
 
-- Application: [`snischuk/nodejs2025q2-service-app`](https://hub.docker.com/repository/docker/snischuk/nodejs2025q2-service-app/tags)
-- Database: [`snischuk/nodejs2025q2-service-database`](https://hub.docker.com/repository/docker/snischuk/nodejs2025q2-service-database/tags)
+- Application: [`snischuk/nodejs2025q2-service-app-with-auth`](https://hub.docker.com/repository/docker/snischuk/nodejs2025q2-service-app-with-auth/tags)
+
+- Database: [`snischuk/nodejs2025q2-service-database-with-auth`](https://hub.docker.com/repository/docker/snischuk/nodejs2025q2-service-database-with-auth/tags)
+
 
 Full vulnerability view:
 
