@@ -9,13 +9,24 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UserEntity } from './entities/user.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { handleNotFoundException } from 'src/utils/utils';
+import { compare, hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.prisma.user.create({ data: createUserDto });
+    const hashedPassword = await hash(
+      createUserDto.password,
+      Number(process.env.CRYPT_SALT),
+    );
+
+    const user = await this.prisma.user.create({
+      data: {
+        ...createUserDto,
+        password: hashedPassword,
+      },
+    });
 
     return new UserEntity(user);
   }
@@ -43,14 +54,24 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
 
-    if (updatePasswordDto.oldPassword !== user.password) {
+    const isPasswordValid = await compare(
+      updatePasswordDto.oldPassword,
+      user.password,
+    );
+
+    if (!isPasswordValid) {
       throw new ForbiddenException('Old password is incorrect');
     }
+
+    const hashedNewPassword = await hash(
+      updatePasswordDto.newPassword,
+      Number(process.env.CRYPT_SALT),
+    );
 
     const updatedUser = await this.prisma.user.update({
       where: { id },
       data: {
-        password: updatePasswordDto.newPassword,
+        password: hashedNewPassword,
         version: { increment: 1 },
       },
     });

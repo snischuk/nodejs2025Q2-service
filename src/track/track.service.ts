@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { CreateTrackDto } from './dto/create-track.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { handleNotFoundException } from 'src/utils/utils';
+import { PrismaService } from '../prisma/prisma.service';
+import { handleNotFoundException } from '../utils/utils';
 
 @Injectable()
 export class TrackService {

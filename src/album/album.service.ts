@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { CreateAlbumDto } from './dto/create-album.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { handleNotFoundException } from 'src/utils/utils';
+import { PrismaService } from '../prisma/prisma.service';
+import { handleNotFoundException } from '../utils/utils';
 
 @Injectable()
 export class AlbumService {
