@@ -37,6 +37,7 @@ services:
     restart: on-failure
     volumes:
       - ./src:/usr/src/app/src
+      - ./logs:/usr/src/app/logs
     depends_on:
       postgres:
         condition: service_healthy
